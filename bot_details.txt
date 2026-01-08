@@ -1,0 +1,34 @@
+medical_coding_chatbot/
+│
+├── app/
+│   ├── main.py              # FastAPI entry point
+│   │
+│   ├── chat.py              # Chat endpoint
+│   ├── llm.py               # LLM API wrapper
+│   ├── prompt.py            # Medical coding system prompt
+│   ├── database.py          # SQLite connection
+│   ├── models.py            # DB models
+│
+├── data/
+│   └── chatbot.db           # SQLite database
+│
+├── tests/
+│
+├── README.md
+└── .env
+
+FLOW:
+
+User
+ ↓
+POST /chat
+ ↓
+chat.py
+ ↓
+prompt.py  → builds medical coding prompt
+ ↓
+llm.py     → calls LLM API
+ ↓
+database.py/models.py (optional save)
+ ↓
+Response to user
