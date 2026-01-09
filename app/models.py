@@ -1,5 +1,5 @@
 from sqlalchemy import Column,Integer,String,DateTime,Text,func
-from .database import Base
+from .sqlite_database import Base
 from datetime import timezone
 from sqlalchemy import ForeignKey
 

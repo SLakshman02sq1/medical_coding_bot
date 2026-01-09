@@ -1,6 +1,6 @@
 from fastapi import FastAPI
-from .chat import router as chat_router
-from .sqlite_database import engine,Base
+from appv1.chat import router as chat_router
+from appv1.mysql_database import engine,Base
 
 app = FastAPI()
 

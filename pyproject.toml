@@ -24,6 +24,7 @@ dependencies = [
     "pydantic-core==2.41.5",
     "pylance==1.0.1",
     "pymongo==4.15.5",
+    "pymysql>=1.1.2",
     "python-dateutil==2.9.0.post0",
     "python-multipart==0.0.21",
     "six==1.17.0",
