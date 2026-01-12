@@ -11,7 +11,7 @@ router = APIRouter()
 @router.post("/chat", response_model=schemas.ChatResponse)
 def chat(request: schemas.ChatRequest, db: Session = Depends(get_db)):
     try:
-        # Use existing session or create new
+        # use existing session or create new
         if request.session_id:
             session_obj = db.get(models.ChatSession, request.session_id)
             if not session_obj:
@@ -22,7 +22,7 @@ def chat(request: schemas.ChatRequest, db: Session = Depends(get_db)):
             db.commit()
             db.refresh(session_obj)
 
-        # Store user message
+        # store user message
         user_msg = models.Message(
             session_id=session_obj.id,
             sender="user",
@@ -32,14 +32,14 @@ def chat(request: schemas.ChatRequest, db: Session = Depends(get_db)):
         db.commit()
         db.refresh(user_msg)
 
-        # Call LLM safely
+        # call LLM
         try:
             ai_message = llm.invoke(MEDICAL_CODING_PROMPT.format(user_input=request.message))
             response_text = ai_message.content
         except Exception as e:
             response_text = f"LLM error: {str(e)}"
 
-        # Store bot message
+        # bot message storage
         bot_msg = models.Message(
             session_id=session_obj.id,
             sender="bot",
@@ -49,7 +49,7 @@ def chat(request: schemas.ChatRequest, db: Session = Depends(get_db)):
         db.commit()
         db.refresh(bot_msg)
 
-        # Return message + session_id
+        # message + session_id
         return schemas.ChatResponse(
             message=response_text,
             session_id=session_obj.id

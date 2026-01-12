@@ -20,10 +20,10 @@ if st.button("Send") and user_input:
         resp.raise_for_status()
         response = resp.json()
 
-        # Update session_id safely
+        # session id update
         st.session_state.session_id = response.get("session_id", None)
 
-        # Display bot reply
+        # bot reply
         st.write("Bot:", response.get("message", "[No message returned]"))
 
     except requests.exceptions.RequestException as e:
